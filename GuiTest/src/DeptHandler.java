@@ -104,6 +104,101 @@ public class DeptHandler {
 		stmt.close();
 		
 	}
+		public Vector<Vector<String>> showAllDepts() throws SQLException
+	{
+		
+		Vector<Vector<String>> toRet=new Vector<>();
+		stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT* FROM deptstores");
+		while(rs.next())
+		{
+			Vector<String> temp=new Vector<>();
+			temp.add(rs.getString("DEPARTMENT_ID"));
+			temp.add(rs.getString("NAME"));
+			temp.add(rs.getString("CITY"));
+			temp.add(rs.getString("CALL_NUM"));
+			temp.add(rs.getString("OWNER"));
+			toRet.add(temp);
+		}
+		stmt.close();
+		return toRet;
+	}
+	public Vector<Vector<String>> showByName(String name) throws SQLException
+	{
+		
+		Vector<Vector<String>> toRet=new Vector<>();
+		stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT* FROM deptstores WHERE name LIKE '"+name+"'");
+		while(rs.next())
+		{
+			Vector<String> temp=new Vector<>();
+			temp.add(rs.getString("DEPARTMENT_ID"));
+			temp.add(rs.getString("NAME"));
+			temp.add(rs.getString("CITY"));
+			temp.add(rs.getString("CALL_NUM"));
+			temp.add(rs.getString("OWNER"));
+			toRet.add(temp);
+		}
+		stmt.close();
+		return toRet;
+	}
+	public Vector<Vector<String>> showByCity(String city) throws SQLException
+	{
+		
+		Vector<Vector<String>> toRet=new Vector<>();
+		stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT* FROM deptstores WHERE city LIKE '"+city+"'");
+		while(rs.next())
+		{
+			Vector<String> temp=new Vector<>();
+			temp.add(rs.getString("DEPARTMENT_ID"));
+			temp.add(rs.getString("NAME"));
+			temp.add(rs.getString("CITY"));
+			temp.add(rs.getString("CALL_NUM"));
+			temp.add(rs.getString("OWNER"));
+			toRet.add(temp);
+		}
+		stmt.close();
+		return toRet;
+	}
+	public Vector<Vector<String>> showByCallNum(String callNum) throws SQLException
+	{
+		
+		Vector<Vector<String>> toRet=new Vector<>();
+		stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT* FROM deptstores WHERE call_num LIKE '"+callNum+"'");
+		while(rs.next())
+		{
+			Vector<String> temp=new Vector<>();
+			temp.add(rs.getString("DEPARTMENT_ID"));
+			temp.add(rs.getString("NAME"));
+			temp.add(rs.getString("CITY"));
+			temp.add(rs.getString("CALL_NUM"));
+			temp.add(rs.getString("OWNER"));
+			toRet.add(temp);
+		}
+		stmt.close();
+		return toRet;
+	}
+	public Vector<Vector<String>> showByOwner(String owner) throws SQLException
+	{
+		
+		Vector<Vector<String>> toRet=new Vector<>();
+		stmt=conn.createStatement();
+		ResultSet rs=stmt.executeQuery("SELECT* FROM deptstores WHERE owner='"+owner+"'");
+		while(rs.next())
+		{
+			Vector<String> temp=new Vector<>();
+			temp.add(rs.getString("DEPARTMENT_ID"));
+			temp.add(rs.getString("NAME"));
+			temp.add(rs.getString("CITY"));
+			temp.add(rs.getString("CALL_NUM"));
+			temp.add(rs.getString("OWNER"));
+			toRet.add(temp);
+		}
+		stmt.close();
+		return toRet;
+	}
 	
 	public void finalize() throws SQLException
 	{
