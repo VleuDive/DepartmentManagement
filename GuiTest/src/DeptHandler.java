@@ -199,7 +199,86 @@ public class DeptHandler {
 		stmt.close();
 		return toRet;
 	}
-	
+		public Vector<Vector<String>> searchWithManyKeywords(Vector<String> input) throws SQLException
+	{ 
+		Vector<Vector<String>> toRet=new Vector<>();
+		stmt=conn.createStatement();
+		String query="SELECT* FROM deptstores WHERE ";
+		for(int i=0;i<input.size();i++)
+		{
+			switch(i)
+			{
+			case 1:{
+				if(input.elementAt(i)!="")
+				{
+					query=query+"name LIKE '"+input.elementAt(i)+"'";
+					int count=0;
+					for(int j=i+1;j<input.size();j++)
+					{
+						if(input.elementAt(j)!="")
+							count++;
+					}
+					if(count!=0)
+					{
+						query=query+"AND";
+					}
+					}
+				break;
+			}
+			case 2:
+			{
+				if(input.elementAt(i)!="")
+				{
+					query=query+"city LIKE '"+input.elementAt(i)+"'";
+					int count=0;
+					for(int j=i+1;j<input.size();j++)
+					{
+						if(input.elementAt(j)!="")
+							count++;
+					}
+					if(count!=0)
+					{
+						query=query+"AND";
+					}
+				}
+				
+				break;
+			}
+			case 3:
+			{
+				if(input.elementAt(i)!="")
+				{
+					query=query+"call_num LIKE '"+input.elementAt(i)+"'";
+					if(input.elementAt(4)!="")
+					{
+						query=query+"AND";
+					}
+				}
+				break;
+			}
+			case 4:
+			{
+				if(input.elementAt(i)!="")
+				{
+					query=query+" owner="+input.elementAt(i);
+				}
+				break;
+			}
+			}
+		}
+		ResultSet rs=stmt.executeQuery(query);
+		while(rs.next())
+		{
+			Vector<String> temp=new Vector<>();
+			temp.add(rs.getString("DEPARTMENT_ID"));
+			temp.add(rs.getString("NAME"));
+			temp.add(rs.getString("CITY"));
+			temp.add(rs.getString("CALL_NUM"));
+			temp.add(rs.getString("OWNER"));
+			toRet.add(temp);
+		}
+		return toRet;
+	}
 	public void finalize() throws SQLException
 	{
 		stmt.close();
